@@ -75,17 +75,17 @@ docker compose down
 | 04 - La Reserve | Path traversal | **Disponible** |
 | 05 - Le Registre des Clients | Injection SQL | **Disponible** |
 | 06 - Le Grand Livre | Injection NoSQL | **Disponible** |
-| 07 - Le Vestiaire | Mass assignment | A venir |
-| 08 - Le Panneau Indicateur | Open redirect | A venir |
-| 09 - La Sonnette | CSRF | A venir |
-| 10 - Le Pigeon Voyageur | SSRF | A venir |
-| 11 - Les Cuisines | Command injection | A venir |
-| 12 - Le Menu du Jour | SSTI (injection de template) | A venir |
-| 13 - L'Atelier | Code injection / deserialisation | A venir |
-| 14 - Le Parchemin Scelle | XXE | A venir |
-| 15 - Le Portier | Injection LDAP | A venir |
-| 16 - Le Journal de Bord | CRLF / log injection | A venir |
-| 17 - Le Perroquet Bavard | Prompt injection (directe puis indirecte) | A venir |
+| 07 - Le Vestiaire | Mass assignment | **Disponible** |
+| 08 - Le Panneau Indicateur | Open redirect | **Disponible** |
+| 09 - La Sonnette | CSRF | **Disponible** |
+| 10 - Le Pigeon Voyageur | SSRF | **Disponible** |
+| 11 - Les Cuisines | Command injection | **Disponible** |
+| 12 - Le Menu du Jour | SSTI (injection de template) | **Disponible** |
+| 13 - L Atelier | Code injection / deserialisation | **Disponible** |
+| 14 - Le Parchemin Scelle | XXE | **Disponible** |
+| 15 - Le Portier | Injection LDAP | **Disponible** |
+| 16 - Le Journal de Bord | CRLF / log injection | **Disponible** |
+| 17 - Le Perroquet Bavard | Prompt injection (directe puis indirecte) | **Disponible** |
 
 > Quelques salles "signature" seront aussi proposees dans d'autres stacks
 > (Flask, Next) pour montrer que la faille est universelle : seule la syntaxe

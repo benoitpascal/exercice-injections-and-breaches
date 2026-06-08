@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Panneau - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">08</span> Le Panneau Indicateur</span>
+      <span class="badge-danger">BRECHE : OPEN REDIRECT</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Ou veux-tu aller ?</h1>
+      <p class="sous-titre">Le panneau t'oriente vers les salles de l'auberge.</p>
+
+      <ul class="directions">
+        <% salles.forEach(function (s) { %>
+          <li><a href="/aller?vers=<%= encodeURIComponent('/salle/' + s) %>">Vers <%= s %></a></li>
+        <% }); %>
+      </ul>
+
+      <p class="mode-avance-titre">Destination libre</p>
+      <p class="note-discrete">Indique une destination, le panneau t'y envoie.</p>
+      <form method="GET" action="/aller" class="bloc-form">
+        <input class="champ" type="text" name="vers" value="/salle/cuisine" />
+        <button class="bouton-pixel" type="submit">M'y conduire</button>
+      </form>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 08 / 17</span></div>
+  </main>
+</body>
+</html>

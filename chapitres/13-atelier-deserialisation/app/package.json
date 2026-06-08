@@ -1,0 +1,8 @@
+{
+  "name": "c13-atelier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chapitre 13 : l'Atelier (deserialisation non sure). App volontairement vulnerable.",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "ejs": "^3.1.10", "express": "^4.19.2", "node-serialize": "^0.0.4" }
+}

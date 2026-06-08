@@ -1,0 +1,7 @@
+/* Specifique au chapitre 17 (Le Perroquet Bavard). */
+.doc-titre { margin: 14px 0 6px; color: var(--encre-pale); }
+.doc-contenu {
+  font-family:'VT323',monospace; font-size:19px; white-space:pre-wrap; word-break:break-word;
+  padding:12px 14px; margin:0; background:#2b1d12; color:#ffd9a8;
+  border:3px solid #000; box-shadow:5px 5px 0 rgba(0,0,0,0.3);
+}

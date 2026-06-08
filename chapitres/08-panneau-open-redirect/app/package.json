@@ -1,0 +1,17 @@
+{
+  "name": "c08-panneau",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chapitre 8 : le Panneau (open redirect). App volontairement vulnerable.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon --legacy-watch server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

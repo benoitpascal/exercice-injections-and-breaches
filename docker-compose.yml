@@ -144,6 +144,266 @@ services:
       - auberge-net
     restart: "no"
 
+  # --------------------------------------------------------------
+  # Chapitre 7 : le Vestiaire (mass assignment)
+  # --------------------------------------------------------------
+  c07-mass-assignment:
+    build: ./chapitres/07-vestiaire-mass-assignment
+    container_name: auberge-c07
+    ports:
+      - "127.0.0.1:4107:3000"
+    volumes:
+      - ./chapitres/07-vestiaire-mass-assignment/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 8 : le Panneau Indicateur (open redirect)
+  # --------------------------------------------------------------
+  c08-open-redirect:
+    build: ./chapitres/08-panneau-open-redirect
+    container_name: auberge-c08
+    ports:
+      - "127.0.0.1:4108:3000"
+    volumes:
+      - ./chapitres/08-panneau-open-redirect/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 9 : la Sonnette (CSRF)
+  # --------------------------------------------------------------
+  c09-csrf-sonnette:
+    build: ./chapitres/09-sonnette-csrf
+    container_name: auberge-c09
+    ports:
+      - "127.0.0.1:4109:3000"
+    volumes:
+      - ./chapitres/09-sonnette-csrf/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 10 : le Pigeon Voyageur (SSRF)
+  # Le service interne (port 9000) tourne DANS le conteneur et n'est pas publie :
+  # seul le serveur public peut l'atteindre, c'est tout l'interet du chapitre.
+  # --------------------------------------------------------------
+  c10-ssrf-pigeon:
+    build: ./chapitres/10-pigeon-ssrf
+    container_name: auberge-c10
+    ports:
+      - "127.0.0.1:4110:3000"
+    volumes:
+      - ./chapitres/10-pigeon-ssrf/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 11 : les Cuisines (command injection) - SALLE A RISQUE
+  # Durcissement maximal : meme une execution de commande reste enfermee ici.
+  # --------------------------------------------------------------
+  c11-command-injection:
+    build: ./chapitres/11-cuisines-command-injection
+    container_name: auberge-c11
+    ports:
+      - "127.0.0.1:4111:3000"
+    volumes:
+      - ./chapitres/11-cuisines-command-injection/app:/app
+      - /app/node_modules
+    user: "node"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 128m
+    cpus: "0.25"
+    pids_limit: 64
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 12 : le Menu du Jour (SSTI) - SALLE A RISQUE
+  # Meme durcissement : une SSTI peut mener a l'execution de code.
+  # --------------------------------------------------------------
+  c12-ssti-menu:
+    build: ./chapitres/12-menu-ssti
+    container_name: auberge-c12
+    ports:
+      - "127.0.0.1:4112:3000"
+    volumes:
+      - ./chapitres/12-menu-ssti/app:/app
+      - /app/node_modules
+    user: "node"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 128m
+    cpus: "0.25"
+    pids_limit: 64
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 15 : le Portier (injection LDAP)
+  # --------------------------------------------------------------
+  c15-ldap-portier:
+    build: ./chapitres/15-portier-ldap
+    container_name: auberge-c15
+    ports:
+      - "127.0.0.1:4115:3000"
+    volumes:
+      - ./chapitres/15-portier-ldap/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 16 : le Journal de Bord (log injection / CRLF)
+  # --------------------------------------------------------------
+  c16-log-journal:
+    build: ./chapitres/16-journal-log-injection
+    container_name: auberge-c16
+    ports:
+      - "127.0.0.1:4116:3000"
+    volumes:
+      - ./chapitres/16-journal-log-injection/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 17 : le Perroquet Bavard (prompt injection)
+  # --------------------------------------------------------------
+  c17-prompt-perroquet:
+    build: ./chapitres/17-perroquet-prompt-injection
+    container_name: auberge-c17
+    ports:
+      - "127.0.0.1:4117:3000"
+    volumes:
+      - ./chapitres/17-perroquet-prompt-injection/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 13 : l'Atelier (deserialisation non sure) - SALLE A RISQUE
+  # Durcissement maximal : la deserialisation peut mener a l'execution de code.
+  # --------------------------------------------------------------
+  c13-deserialisation:
+    build: ./chapitres/13-atelier-deserialisation
+    container_name: auberge-c13
+    ports:
+      - "127.0.0.1:4113:3000"
+    volumes:
+      - ./chapitres/13-atelier-deserialisation/app:/app
+      - /app/node_modules
+    user: "node"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 128m
+    cpus: "0.25"
+    pids_limit: 64
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 14 : le Parchemin Scelle (XXE)
+  # Lecture de fichier : aucun dossier sensible de l'hote n'est monte.
+  # --------------------------------------------------------------
+  c14-xxe-parchemin:
+    build: ./chapitres/14-parchemin-xxe
+    container_name: auberge-c14
+    ports:
+      - "127.0.0.1:4114:3000"
+    volumes:
+      - ./chapitres/14-parchemin-xxe/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
   # ================================================================
   # GABARIT pour les chapitres A RISQUE (command injection, SSTI, code injection).
   # A copier-coller et adapter : durcissement maximal. Le conteneur devient

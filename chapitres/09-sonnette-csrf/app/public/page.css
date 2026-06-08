@@ -1,0 +1,11 @@
+/* Specifique au chapitre 9 (La Sonnette). */
+.compteurs { display:flex; gap:14px; margin: 4px 0 20px; flex-wrap: wrap; }
+.compteur {
+  flex:1; min-width:140px; padding:14px 16px; text-align:center;
+  background:#f6edd2; border:3px solid var(--bois); box-shadow:5px 5px 0 rgba(0,0,0,0.18);
+}
+.compteur .etiq { display:block; font-family:'Press Start 2P',monospace; font-size:9px; color:var(--encre-pale); margin-bottom:10px; }
+.compteur strong { font-size:30px; }
+.note-discrete { margin: 18px 0 6px; color: var(--encre-pale); font-size: 18px; }
+.lien-piege { display:inline-block; color: var(--mousse); text-decoration: underline; }
+.lien-retour { display:inline-block; margin-top:10px; color:var(--bois-clair); }

@@ -8,3 +8,7 @@ node_modules/
 # Variables d'environnement locales
 .env
 .env.local
+
+# Outils locaux de maintenance (non publies)
+maj.sh
+*.tar.gz

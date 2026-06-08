@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Perroquet Bavard - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">17</span> Le Perroquet Bavard</span>
+      <span class="badge-danger">BRECHE : PROMPT INJECTION</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Le Perroquet du Tavernier</h1>
+      <p class="sous-titre">Le perroquet connait les secrets de la maison. Parle-lui.</p>
+
+      <form method="POST" action="/parler" class="bloc-form">
+        <textarea class="champ" name="message" rows="3" placeholder="Dis quelque chose au perroquet..."><%= message %></textarea>
+        <button class="bouton-pixel" type="submit">Parler au perroquet</button>
+      </form>
+
+      <% if (reponse !== null) { %>
+        <p class="doc-titre">Le perroquet repond :</p>
+        <pre class="doc-contenu"><%= reponse %></pre>
+      <% } %>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 17 / 17</span></div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+/* Specifique au chapitre 7 (Le Vestiaire). */
+.badge-client {
+  padding: 16px 18px; margin: 4px 0 18px;
+  background: #f6edd2; border: 3px solid var(--bois); border-left: 8px solid var(--mousse);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.18);
+}
+.badge-staff { border-left-color: var(--braise); }
+.badge-client .ligne { margin: 6px 0; }
+.badge-client .etiq {
+  display: inline-block; min-width: 90px;
+  font-family:'Press Start 2P',monospace; font-size: 9px; color: var(--encre-pale);
+}
+.panneau-staff {
+  padding: 14px 16px; margin: 0 0 18px;
+  background:#2b1d12; color:#ffd9a8; border:3px solid #000; box-shadow:5px 5px 0 rgba(0,0,0,0.3);
+}
+.panneau-staff .auteur { font-family:'Press Start 2P',monospace; font-size:10px; color:var(--braise-claire); margin:0 0 10px; }
+.panneau-staff p { margin: 0; }
+.etiq-form { color: var(--encre-pale); }
+.mode-avance-titre { margin: 22px 0 4px; font-weight: bold; color: var(--bois-clair); }
+.note-discrete { margin: 0 0 8px; color: var(--encre-pale); font-size: 18px; }

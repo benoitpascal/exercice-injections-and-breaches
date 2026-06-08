@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Vestiaire - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">07</span> Le Vestiaire</span>
+      <span class="badge-danger">BRECHE : MASS ASSIGNMENT</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Ton badge</h1>
+
+      <div class="badge-client <%= profil.role === 'client' ? '' : 'badge-staff' %>">
+        <p class="ligne"><span class="etiq">Pseudo</span> <strong><%= profil.pseudo %></strong></p>
+        <p class="ligne"><span class="etiq">Statut</span> <strong><%= profil.role %></strong></p>
+        <p class="ligne"><span class="etiq">Or</span> <strong><%= profil.or %></strong></p>
+      </div>
+
+      <% if (profil.role !== 'client') { %>
+        <div class="panneau-staff">
+          <p class="auteur">Panneau du personnel</p>
+          <p>Code de la cave : 7-4-1-8. Cle du grand coffre derriere le tonneau d'hydromel.</p>
+        </div>
+      <% } %>
+
+      <form method="POST" action="/profil" class="bloc-form">
+        <label class="etiq-form">Changer ton pseudo :</label>
+        <input class="champ" type="text" name="pseudo" value="<%= profil.pseudo %>" />
+        <button class="bouton-pixel" type="submit">Enregistrer</button>
+      </form>
+
+      <p class="mode-avance-titre">Mode avance : champs bruts du formulaire</p>
+      <p class="note-discrete">Ce champ ajoute des couples champ=valeur au formulaire, comme on pourrait le faire en bricolant la requete.</p>
+      <textarea id="bruts" class="champ" rows="2" placeholder="role=Tavernier&or=9999"></textarea>
+      <button class="bouton-pixel" id="envoyer-bruts" type="button">Envoyer avec ces champs</button>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 07 / 17</span></div>
+  </main>
+
+  <script>
+    var b = document.getElementById('envoyer-bruts');
+    if (b) {
+      b.addEventListener('click', function () {
+        var pseudo = encodeURIComponent(document.querySelector('input[name=pseudo]').value);
+        var extra = document.getElementById('bruts').value.trim();
+        var corps = 'pseudo=' + pseudo + (extra ? '&' + extra : '');
+        fetch('/profil', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: corps
+        }).then(function (r) { return r.text(); }).then(function (html) {
+          document.open(); document.write(html); document.close();
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+/* Specifique au chapitre 8 (Le Panneau). */
+.directions { margin: 0 0 22px; padding-left: 22px; }
+.directions li { margin: 6px 0; }
+.directions a { color: var(--bois-clair); }
+.mode-avance-titre { margin: 18px 0 4px; font-weight: bold; color: var(--bois-clair); }
+.note-discrete { margin: 0 0 8px; color: var(--encre-pale); font-size: 18px; }
+.lien-retour { display:inline-block; margin-top:10px; color:var(--bois-clair); }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Parchemin Scelle - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">14</span> Le Parchemin Scelle</span>
+      <span class="badge-danger">BRECHE : XXE</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Le Parchemin Scelle</h1>
+      <p class="sous-titre">Depose un parchemin (au format XML), le messager te lit son message.</p>
+
+      <form method="POST" action="/lire" class="bloc-form">
+        <textarea class="champ" name="parchemin" rows="5" placeholder="Parchemin XML..."><%= parchemin %></textarea>
+        <button class="bouton-pixel" type="submit">Lire le parchemin</button>
+      </form>
+
+      <% if (erreur) { %><p class="erreur-doc"><%= erreur %></p><% } %>
+
+      <% if (contenu !== null) { %>
+        <p class="doc-titre">Message du parchemin :</p>
+        <pre class="doc-contenu"><%= contenu %></pre>
+      <% } %>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 14 / 17</span></div>
+  </main>
+</body>
+</html>
