@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Livre d'Or - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="lanterne lanterne-gauche"></div>
+  <div class="lanterne lanterne-droite"></div>
+
+  <main class="parchemin">
+    <header class="entete">
+      <h1>Livre d'Or</h1>
+      <p class="sous-titre">Laisse un mot avant de reprendre la route, voyageur.</p>
+    </header>
+
+    <form method="POST" action="/signer" class="formulaire">
+      <input type="text" name="auteur" placeholder="Ton nom de voyageur" maxlength="40" />
+      <textarea name="message" placeholder="Ton message pour les prochains visiteurs..." rows="3" required></textarea>
+      <button type="submit">Signer le livre</button>
+    </form>
+
+    <section class="messages">
+      <% livreDor.forEach(function (entree) { %>
+        <article class="message">
+          <%# Le nom de l'auteur est affiche avec une balise echappee : il est protege. %>
+          <p class="auteur"><%= entree.auteur %></p>
+
+          <%# ATTENTION - TODO securiser : la ligne ci-dessous affiche le message %>
+          <%# avec une balise NON echappee. Le texte tape par le visiteur est injecte %>
+          <%# tel quel dans la page : c'est la faille a corriger (acte 4). %>
+          <div class="contenu"><%- entree.message %></div>
+        </article>
+      <% }); %>
+    </section>
+  </main>
+</body>
+</html>

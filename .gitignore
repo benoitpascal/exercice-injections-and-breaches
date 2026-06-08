@@ -1,0 +1,10 @@
+# Dependances (reconstruites par Docker a chaque build)
+node_modules/
+
+# Logs et temporaires
+*.log
+.DS_Store
+
+# Variables d'environnement locales
+.env
+.env.local

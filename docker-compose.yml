@@ -1,0 +1,76 @@
+# L'Auberge du Pixel - orchestration des chapitres.
+# Chaque faille tourne dans son propre conteneur jetable.
+#
+# Regle d'or de surete : si quelque chose casse ou se comporte mal,
+#   docker compose down && docker compose up --build
+# remet la salle concernee a neuf. Une attaque reussie reste prisonniere
+# du conteneur, elle ne touche pas ta machine.
+
+services:
+
+  # --------------------------------------------------------------
+  # Chapitre 1 : Livre d'Or (XSS stocke)
+  # Faille cote navigateur, aucun risque pour l'hote. Durcissement standard.
+  # --------------------------------------------------------------
+  c01-xss-livre-dor:
+    build: ./chapitres/01-livre-dor-xss-stocke
+    container_name: auberge-c01
+    ports:
+      - "127.0.0.1:4101:3000"        # accessible UNIQUEMENT depuis ta machine
+    volumes:
+      - ./chapitres/01-livre-dor-xss-stocke/app:/app   # tu edites le code depuis l'hote (acte 4)
+      - /app/node_modules                              # preserve les dependances installees dans l'image
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # ================================================================
+  # GABARIT pour les chapitres A RISQUE (command injection, SSTI, code injection).
+  # A copier-coller et adapter : durcissement maximal. Le conteneur devient
+  # une boite hermetique dont une attaque reussie ne peut pas sortir.
+  # ================================================================
+  #
+  # cXX-command-injection:
+  #   build: ./chapitres/XX-...
+  #   container_name: auberge-cXX
+  #   ports:
+  #     - "127.0.0.1:41XX:3000"
+  #   user: "node"                   # jamais root
+  #   read_only: true                # systeme de fichiers en lecture seule
+  #   tmpfs:
+  #     - /tmp                        # seule zone ecrivable, videe a l'arret
+  #   cap_drop:
+  #     - ALL
+  #   security_opt:
+  #     - "no-new-privileges:true"
+  #   mem_limit: 128m
+  #   cpus: "0.25"
+  #   pids_limit: 64                 # coupe court aux fork bombs
+  #   networks:
+  #     - auberge-isole             # voir reseau "internal" plus bas
+  #   restart: "no"
+  #
+  #   # INTERDITS ABSOLUS dans ce projet :
+  #   #  - ne JAMAIS monter /var/run/docker.sock (ce serait une evasion de conteneur)
+  #   #  - ne JAMAIS monter un dossier sensible de l'hote
+  #   # Le faux "secret" a exfiltrer doit vivre DANS le conteneur (ex: /app/tresor.txt).
+
+networks:
+  auberge-net:
+    driver: bridge
+
+  # Reseau pour les chapitres a risque : coupe d'Internet.
+  # Note : selon ta version de Docker, verifie que la publication de port
+  # (127.0.0.1:...) fonctionne bien avec un reseau "internal". Sinon, garde
+  # le reseau standard ci-dessus : les autres protections (non-root, cap_drop,
+  # read_only, limites) suffisent deja a contenir une attaque.
+  auberge-isole:
+    driver: bridge
+    internal: true
