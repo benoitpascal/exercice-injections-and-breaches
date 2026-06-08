@@ -1,0 +1,15 @@
+/* Specifique au chapitre 4 (La Reserve). */
+.liste-titre { margin: 0 0 6px; font-weight: bold; }
+.docs { margin: 0 0 22px; padding-left: 22px; }
+.docs li { margin: 4px 0; }
+.docs a { color: var(--bois-clair); }
+.doc-titre { margin: 8px 0 6px; color: var(--encre-pale); }
+.doc-contenu {
+  font-family: 'VT323', monospace; font-size: 19px;
+  white-space: pre-wrap; word-break: break-word;
+  padding: 14px 16px; margin: 0;
+  background: #f6edd2; color: var(--encre);
+  border: 3px solid var(--bois); border-left: 7px solid var(--mousse);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.18);
+}
+.erreur-doc { color: var(--alarme); }

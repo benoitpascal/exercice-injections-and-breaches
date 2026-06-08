@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coffre n&deg;<%= id %> - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">03</span> Les Coffres</span>
+      <span class="badge-danger">BRECHE : IDOR</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Coffre n&deg;<%= id %></h1>
+      <% if (id !== monId) { %>
+        <p class="sous-titre alerte-vol">Ce coffre n'est pas le tien. Il appartient a <strong><%= coffre.proprietaire %></strong>.</p>
+      <% } else { %>
+        <p class="sous-titre">Ton coffre personnel.</p>
+      <% } %>
+
+      <div class="carte-coffre">
+        <p class="auteur"><%= coffre.proprietaire %></p>
+        <p class="ligne-or">Or : <strong><%= coffre.or %> pieces</strong></p>
+        <p class="ligne-secret">Note privee : <%= coffre.secret %></p>
+      </div>
+
+      <a class="lien-retour" href="/">Retour a la salle</a>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 03 / 17</span></div>
+  </main>
+</body>
+</html>

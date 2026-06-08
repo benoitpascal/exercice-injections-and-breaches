@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Grand Livre - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">06</span> Le Grand Livre</span>
+      <span class="badge-danger">BRECHE : INJECTION NOSQL</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Le Grand Livre</h1>
+
+      <% if (utilisateur) { %>
+        <p class="sous-titre connecte">Connecte en tant que <strong><%= utilisateur.nom %></strong> (<%= utilisateur.role %>).</p>
+        <div class="carte-acces">
+          <p class="auteur">Droits ouverts</p>
+          <p><%= utilisateur.note %></p>
+        </div>
+        <a class="lien-retour" href="/">Se deconnecter</a>
+      <% } else { %>
+        <p class="sous-titre">Identifie-toi pour consulter le grand livre.</p>
+
+        <form method="POST" action="/connexion" class="bloc-form">
+          <input class="champ" type="text" name="nom" placeholder="Nom d'utilisateur" />
+          <input class="champ" type="text" name="mdp" placeholder="Mot de passe" />
+          <button class="bouton-pixel" type="submit">Se connecter</button>
+        </form>
+
+        <% if (erreur) { %><p class="erreur-doc"><%= erreur %></p><% } %>
+
+        <p class="mode-avance-titre">Mode avance : requete brute (JSON)</p>
+        <p class="note-discrete">Ce champ envoie le corps tel quel a la base, comme le ferait une application qui fait confiance au JSON recu.</p>
+        <textarea id="json-brut" class="champ" rows="3">{"nom": "gardien", "mdp": "pixel123"}</textarea>
+        <button class="bouton-pixel" id="envoyer-json" type="button">Envoyer la requete brute</button>
+      <% } %>
+
+      <% if (filtre) { %>
+        <p class="doc-titre">Filtre utilise pour la recherche :</p>
+        <pre class="doc-contenu"><%= filtre %></pre>
+      <% } %>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 06 / 17</span></div>
+  </main>
+
+  <script>
+    var bouton = document.getElementById('envoyer-json');
+    if (bouton) {
+      bouton.addEventListener('click', function () {
+        var corps = document.getElementById('json-brut').value;
+        fetch('/connexion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: corps
+        }).then(function (r) { return r.text(); }).then(function (html) {
+          document.open(); document.write(html); document.close();
+        });
+      });
+    }
+  </script>
+</body>
+</html>

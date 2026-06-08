@@ -1,0 +1,265 @@
+/* ====================================================================
+   L'AUBERGE DU PIXEL - theme partage
+   Design system reutilise par toutes les salles de l'exercice.
+   Sans image : tout est fait en CSS (degrades, ombres, clip-path, SVG inline).
+   ==================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+  --nuit:          #0f0b08;
+  --bois-fonce:    #20150d;
+  --bois:          #382415;
+  --bois-clair:    #57391f;
+  --parchemin:     #ecdcb1;
+  --parchemin-2:   #ddc890;
+  --parchemin-bord:#b89a5e;
+  --encre:         #3a2615;
+  --encre-pale:    #6b5236;
+  --braise:        #ff8a1e;
+  --braise-claire: #ffc46b;
+  --lueur:         rgba(255, 138, 30, 0.45);
+  --mousse:        #7f8a3f;
+  --alarme:        #e0452f;
+  --alarme-lueur:  rgba(224, 69, 47, 0.5);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  font-family: 'VT323', monospace;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--encre);
+  background-color: var(--nuit);
+  /* Atmosphere : halo chaud au centre, planches de bois verticales, grain. */
+  background-image:
+    radial-gradient(120% 90% at 50% 0%, rgba(255,138,30,0.10) 0%, transparent 45%),
+    radial-gradient(140% 120% at 50% 50%, transparent 55%, rgba(0,0,0,0.65) 100%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 2px, transparent 2px 64px),
+    linear-gradient(180deg, #1a120c 0%, var(--nuit) 100%);
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 64px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Grain pixel discret par-dessus tout. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Enseigne suspendue ---------- */
+.enseigne {
+  margin: 40px 0 8px;
+  text-align: center;
+  transform-origin: top center;
+  animation: balance 5s ease-in-out infinite;
+}
+.enseigne .planche {
+  display: inline-block;
+  padding: 16px 30px;
+  background: linear-gradient(180deg, var(--bois-clair), var(--bois));
+  border: 4px solid var(--bois-fonce);
+  box-shadow: 0 0 0 3px var(--bois-clair), 0 14px 0 -2px rgba(0,0,0,0.5), 0 0 40px 6px var(--lueur);
+  color: var(--braise-claire);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #000;
+}
+.enseigne .clous { color: var(--bois-fonce); }
+@keyframes balance {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50%      { transform: rotate(1.2deg); }
+}
+
+/* ---------- Lanternes ---------- */
+.lanterne {
+  position: fixed;
+  top: 30px;
+  width: 22px;
+  height: 30px;
+  background: linear-gradient(180deg, var(--braise-claire), var(--braise));
+  border: 4px solid var(--bois-fonce);
+  border-radius: 3px 3px 6px 6px;
+  box-shadow: 0 0 36px 12px var(--lueur);
+  animation: vacille 2.4s ease-in-out infinite;
+  z-index: 2;
+}
+.lanterne::before {
+  content: ""; position: absolute; left: 50%; top: -16px;
+  width: 3px; height: 14px; background: var(--bois-fonce); transform: translateX(-50%);
+}
+.lanterne.gauche { left: 7%; }
+.lanterne.droite { right: 7%; animation-delay: 0.9s; }
+@keyframes vacille {
+  0%, 100% { box-shadow: 0 0 36px 12px var(--lueur); filter: brightness(1); }
+  45%      { box-shadow: 0 0 24px 8px var(--lueur);  filter: brightness(0.8); }
+  60%      { box-shadow: 0 0 40px 14px var(--lueur); filter: brightness(1.1); }
+}
+
+/* ---------- Cadre de salle ---------- */
+.salle {
+  width: 100%;
+  max-width: 660px;
+  z-index: 1;
+  animation: monte 0.5s ease both;
+}
+@keyframes monte {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.entete-salle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0 14px;
+  flex-wrap: wrap;
+}
+.entete-salle .titre {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: var(--parchemin);
+  text-shadow: 2px 2px 0 #000;
+}
+.entete-salle .titre .num {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 4px 8px;
+  background: var(--braise);
+  color: var(--bois-fonce);
+  border: 3px solid var(--bois-fonce);
+}
+.badge-danger {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 7px 10px;
+  color: #fff;
+  background: var(--alarme);
+  border: 3px solid #000;
+  box-shadow: 0 0 16px 2px var(--alarme-lueur);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 14px 1px var(--alarme-lueur); }
+  50%      { box-shadow: 0 0 22px 5px var(--alarme-lueur); }
+}
+
+/* ---------- Panneau parchemin ---------- */
+.panneau {
+  position: relative;
+  background:
+    radial-gradient(circle at 18% 22%, var(--parchemin-2) 0 1px, transparent 2px),
+    linear-gradient(160deg, var(--parchemin) 0%, var(--parchemin-2) 100%);
+  background-size: 8px 8px, 100% 100%;
+  border: 5px solid var(--bois);
+  box-shadow:
+    0 0 0 3px var(--bois-fonce),
+    14px 14px 0 0 rgba(0,0,0,0.5),
+    inset 0 0 60px rgba(120, 80, 30, 0.18);
+  padding: 30px 28px 36px;
+}
+.panneau::before, .panneau::after {
+  content: ""; position: absolute; width: 16px; height: 16px;
+  background: var(--bois); border: 3px solid var(--bois-fonce);
+}
+.panneau::before { top: -8px; left: -8px; }
+.panneau::after  { bottom: -8px; right: -8px; }
+
+h1.titre-page {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--braise);
+  text-shadow: 3px 3px 0 var(--bois-fonce);
+  margin: 0 0 12px;
+}
+.sous-titre { margin: 0 0 22px; color: var(--encre-pale); }
+
+/* ---------- Formulaires ---------- */
+.bloc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  margin-bottom: 26px;
+  background: rgba(56, 36, 21, 0.07);
+  border: 3px dashed var(--parchemin-bord);
+}
+.champ, textarea.champ {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 9px 11px;
+  color: var(--encre);
+  background: #f6edd2;
+  border: 3px solid var(--bois);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.12);
+  resize: vertical;
+}
+.champ:focus, textarea.champ:focus {
+  outline: none;
+  border-color: var(--braise);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.12), 0 0 0 3px var(--lueur);
+}
+
+.bouton-pixel {
+  align-self: flex-start;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  padding: 13px 18px;
+  color: var(--parchemin);
+  background: var(--braise);
+  border: 3px solid var(--bois-fonce);
+  box-shadow: 5px 5px 0 var(--bois-fonce);
+  cursor: pointer;
+  transition: transform 0.06s, box-shadow 0.06s, background 0.15s;
+}
+.bouton-pixel:hover { background: var(--braise-claire); }
+.bouton-pixel:active { transform: translate(5px, 5px); box-shadow: none; }
+
+/* ---------- Cartes / messages ---------- */
+.liste { display: flex; flex-direction: column; gap: 14px; }
+.carte {
+  padding: 14px 16px;
+  background: #f6edd2;
+  border-left: 7px solid var(--mousse);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.18);
+  animation: monte 0.4s ease both;
+}
+.carte .auteur {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--mousse);
+  margin: 0 0 9px;
+}
+.carte .contenu { margin: 0; word-break: break-word; }
+
+/* ---------- Barre de statut facon HUD ---------- */
+.hud {
+  margin-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 14px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--braise-claire);
+  background: var(--bois-fonce);
+  border: 3px solid #000;
+  flex-wrap: wrap;
+}
+.hud .coeurs { color: var(--alarme); letter-spacing: 2px; }

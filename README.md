@@ -70,11 +70,11 @@ docker compose down
 | Salle | Faille | Statut |
 |-------|--------|--------|
 | 01 - Le Livre d'Or | XSS stocke | **Disponible** |
-| 02 - Le Tableau d'Affichage | XSS reflechi | A venir |
-| 03 - Les Coffres | IDOR / controle d'acces | A venir |
-| 04 - La Reserve | Path traversal | A venir |
-| 05 - Le Registre des Clients | Injection SQL | A venir |
-| 06 - Le Grand Livre | Injection NoSQL | A venir |
+| 02 - Le Tableau d'Affichage | XSS reflechi | **Disponible** |
+| 03 - Les Coffres | IDOR / controle d acces | **Disponible** |
+| 04 - La Reserve | Path traversal | **Disponible** |
+| 05 - Le Registre des Clients | Injection SQL | **Disponible** |
+| 06 - Le Grand Livre | Injection NoSQL | **Disponible** |
 | 07 - Le Vestiaire | Mass assignment | A venir |
 | 08 - Le Panneau Indicateur | Open redirect | A venir |
 | 09 - La Sonnette | CSRF | A venir |
@@ -97,10 +97,18 @@ docker compose down
 auberge-du-pixel/
   docker-compose.yml         orchestration de toutes les salles
   README.md                  ce fichier
+  commun/
+    theme.css                le theme pixel partage par toutes les salles
   chapitres/
     01-livre-dor-xss-stocke/
       README.md              le chapitre en 5 actes
       Dockerfile
       app/                   le code vulnerable (que tu edites a l'acte 4)
       solution/              le correctif de reference (a n'ouvrir qu'apres)
+    02-tableau-affichage-xss-reflechi/
+      ...                    meme structure
 ```
+
+> Le theme vit dans `commun/theme.css` et est recopie dans le dossier
+> `app/public/` de chaque salle, pour que chaque conteneur reste autonome.
+

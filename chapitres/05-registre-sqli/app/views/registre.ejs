@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Registre - L'Auberge du Pixel</title>
+  <link rel="stylesheet" href="/theme.css" /><link rel="stylesheet" href="/page.css" />
+</head>
+<body>
+  <div class="lanterne gauche"></div><div class="lanterne droite"></div>
+  <div class="enseigne"><span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span></div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">05</span> Le Registre des Clients</span>
+      <span class="badge-danger">BRECHE : INJECTION SQL</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Bureau du Registre</h1>
+
+      <% if (utilisateur) { %>
+        <p class="sous-titre connecte">Connecte en tant que <strong><%= utilisateur.nom %></strong> (<%= utilisateur.role %>).</p>
+        <div class="carte-acces">
+          <p class="auteur">Droits ouverts</p>
+          <p><%= utilisateur.note %></p>
+        </div>
+        <a class="lien-retour" href="/">Se deconnecter</a>
+      <% } else { %>
+        <p class="sous-titre">Identifie-toi pour consulter le registre.</p>
+        <form method="POST" action="/connexion" class="bloc-form">
+          <input class="champ" type="text" name="nom" placeholder="Nom d'utilisateur" />
+          <input class="champ" type="text" name="mdp" placeholder="Mot de passe" />
+          <button class="bouton-pixel" type="submit">Se connecter</button>
+        </form>
+        <% if (erreur) { %><p class="erreur-doc"><%= erreur %></p><% } %>
+      <% } %>
+
+      <% if (requete) { %>
+        <p class="doc-titre">Requete envoyee a la base :</p>
+        <pre class="doc-contenu"><%= requete %></pre>
+      <% } %>
+    </section>
+
+    <div class="hud"><span>APPRENTI GARDIEN</span><span class="coeurs">&lt;3 &lt;3 &lt;3</span><span>SALLE 05 / 17</span></div>
+  </main>
+</body>
+</html>

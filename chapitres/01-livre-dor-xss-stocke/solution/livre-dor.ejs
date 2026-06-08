@@ -4,36 +4,52 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Livre d'Or - L'Auberge du Pixel</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/theme.css" />
+  <link rel="stylesheet" href="/page.css" />
 </head>
 <body>
-  <div class="lanterne lanterne-gauche"></div>
-  <div class="lanterne lanterne-droite"></div>
+  <div class="lanterne gauche"></div>
+  <div class="lanterne droite"></div>
 
-  <main class="parchemin">
-    <header class="entete">
-      <h1>Livre d'Or</h1>
+  <div class="enseigne">
+    <span class="planche"><span class="clous">+</span> L'AUBERGE DU PIXEL <span class="clous">+</span></span>
+  </div>
+
+  <main class="salle">
+    <div class="entete-salle">
+      <span class="titre"><span class="num">01</span> Le Livre d'Or</span>
+      <span class="badge-danger">BRECHE : XSS STOCKE</span>
+    </div>
+
+    <section class="panneau">
+      <h1 class="titre-page">Livre d'Or</h1>
       <p class="sous-titre">Laisse un mot avant de reprendre la route, voyageur.</p>
-    </header>
 
-    <form method="POST" action="/signer" class="formulaire">
-      <input type="text" name="auteur" placeholder="Ton nom de voyageur" maxlength="40" />
-      <textarea name="message" placeholder="Ton message pour les prochains visiteurs..." rows="3" required></textarea>
-      <button type="submit">Signer le livre</button>
-    </form>
+      <form method="POST" action="/signer" class="bloc-form">
+        <input class="champ" type="text" name="auteur" placeholder="Ton nom de voyageur" maxlength="40" />
+        <textarea class="champ" name="message" placeholder="Ton message pour les prochains visiteurs..." rows="3" required></textarea>
+        <button class="bouton-pixel" type="submit">Signer le livre</button>
+      </form>
 
-    <section class="messages">
-      <% livreDor.forEach(function (entree) { %>
-        <article class="message">
-          <p class="auteur"><%= entree.auteur %></p>
+      <section class="liste">
+        <% livreDor.forEach(function (entree) { %>
+          <article class="carte">
+            <p class="auteur"><%= entree.auteur %></p>
 
-          <%# CORRIGE : on utilise desormais la balise echappee au lieu de la balise brute. %>
-          <%# EJS neutralise les caracteres dangereux (le chevron ouvrant devient une entite HTML). %>
-          <%# Un script tape par un visiteur s'affiche maintenant comme du texte inerte. %>
-          <div class="contenu"><%= entree.message %></div>
-        </article>
-      <% }); %>
+            <%# CORRIGE : on utilise desormais la balise echappee au lieu de la balise brute. %>
+            <%# EJS neutralise les caracteres dangereux (le chevron ouvrant devient une entite HTML). %>
+            <%# Un script tape par un visiteur s'affiche maintenant comme du texte inerte. %>
+            <div class="contenu"><%= entree.message %></div>
+          </article>
+        <% }); %>
+      </section>
     </section>
+
+    <div class="hud">
+      <span>APPRENTI GARDIEN</span>
+      <span class="coeurs">&lt;3 &lt;3 &lt;3</span>
+      <span>SALLE 01 / 17</span>
+    </div>
   </main>
 </body>
 </html>

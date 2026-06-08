@@ -1,0 +1,17 @@
+/* Specifique au chapitre 2 (Tableau d'Affichage). Le gros du style vient de theme.css. */
+
+.recherche-info {
+  margin: 0 0 18px;
+  color: var(--encre-pale);
+  font-size: 20px;
+}
+.recherche-info::before {
+  content: "> ";
+  color: var(--braise);
+}
+
+.livre-vide {
+  text-align: center;
+  color: var(--encre-pale);
+  padding: 18px 0;
+}

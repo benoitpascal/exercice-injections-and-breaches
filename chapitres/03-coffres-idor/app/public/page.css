@@ -1,0 +1,18 @@
+/* Specifique au chapitre 3 (Les Coffres). */
+.carte-coffre {
+  padding: 18px 20px;
+  margin: 8px 0 18px;
+  background: #f6edd2;
+  border: 3px solid var(--bois);
+  border-left: 8px solid var(--braise);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.18);
+}
+.carte-coffre .auteur {
+  font-family: 'Press Start 2P', monospace; font-size: 10px;
+  color: var(--mousse); margin: 0 0 12px;
+}
+.carte-coffre p { margin: 6px 0; }
+.ligne-secret { color: var(--encre-pale); }
+.alerte-vol { color: var(--alarme); }
+.note-discrete { color: var(--encre-pale); font-size: 19px; margin: 0; }
+.lien-retour { display: inline-block; margin-top: 8px; color: var(--bois-clair); }

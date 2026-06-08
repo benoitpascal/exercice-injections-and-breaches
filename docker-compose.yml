@@ -31,6 +31,119 @@ services:
       - auberge-net
     restart: "no"
 
+  # --------------------------------------------------------------
+  # Chapitre 2 : Tableau d'Affichage (XSS reflechi)
+  # Faille cote navigateur, aucun risque pour l'hote. Durcissement standard.
+  # --------------------------------------------------------------
+  c02-xss-tableau:
+    build: ./chapitres/02-tableau-affichage-xss-reflechi
+    container_name: auberge-c02
+    ports:
+      - "127.0.0.1:4102:3000"
+    volumes:
+      - ./chapitres/02-tableau-affichage-xss-reflechi/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 3 : Les Coffres (IDOR)
+  # --------------------------------------------------------------
+  c03-idor-coffres:
+    build: ./chapitres/03-coffres-idor
+    container_name: auberge-c03
+    ports:
+      - "127.0.0.1:4103:3000"
+    volumes:
+      - ./chapitres/03-coffres-idor/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 4 : La Reserve (path traversal)
+  # Faille de lecture de fichier : le conteneur ne monte AUCUN dossier
+  # sensible de l'hote, donc une traversee reste limitee a la boite.
+  # --------------------------------------------------------------
+  c04-path-traversal:
+    build: ./chapitres/04-reserve-path-traversal
+    container_name: auberge-c04
+    ports:
+      - "127.0.0.1:4104:3000"
+    volumes:
+      - ./chapitres/04-reserve-path-traversal/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 5 : le Registre (injection SQL, base SQLite embarquee)
+  # --------------------------------------------------------------
+  c05-sqli-registre:
+    build: ./chapitres/05-registre-sqli
+    container_name: auberge-c05
+    ports:
+      - "127.0.0.1:4105:3000"
+    volumes:
+      - ./chapitres/05-registre-sqli/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
+  # --------------------------------------------------------------
+  # Chapitre 6 : le Grand Livre (injection NoSQL, moteur en memoire)
+  # --------------------------------------------------------------
+  c06-nosqli-grand-livre:
+    build: ./chapitres/06-grand-livre-nosqli
+    container_name: auberge-c06
+    ports:
+      - "127.0.0.1:4106:3000"
+    volumes:
+      - ./chapitres/06-grand-livre-nosqli/app:/app
+      - /app/node_modules
+    cap_drop:
+      - ALL
+    security_opt:
+      - "no-new-privileges:true"
+    mem_limit: 256m
+    cpus: "0.5"
+    pids_limit: 128
+    networks:
+      - auberge-net
+    restart: "no"
+
   # ================================================================
   # GABARIT pour les chapitres A RISQUE (command injection, SSTI, code injection).
   # A copier-coller et adapter : durcissement maximal. Le conteneur devient

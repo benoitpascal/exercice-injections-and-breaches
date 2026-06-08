@@ -1,0 +1,7 @@
+/* Specifique au chapitre 1 (Livre d'Or). Le gros du style vient de theme.css. */
+
+.livre-vide {
+  text-align: center;
+  color: var(--encre-pale);
+  padding: 18px 0;
+}
